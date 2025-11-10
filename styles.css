@@ -1,0 +1,10 @@
+/* extra styles (unchanged basics) */
+:root{--bg:#0f141a;--panel:#111821;--key:#22303c;--key-b:#2e3b48;--text:#e6eef2}
+*{box-sizing:border-box}
+button,input,textarea{font:inherit}
+.btn[disabled]{opacity:.6}
+#keyboardPanel .keys .key{touch-action:manipulation}
+.left-dock{order:1}
+.right-dock{order:2}
+body.righty #keyboardPanel{order:2}
+body.righty #sharePanel{order:1}
