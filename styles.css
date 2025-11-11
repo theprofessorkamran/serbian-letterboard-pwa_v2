@@ -53,8 +53,8 @@ body{padding-bottom:env(safe-area-inset-bottom);background:var(--bg);color:var(-
 #phrasesPanel{order:3}
 #sharePanel{order:4}
 
-/* Keep the keyboard accessible on phones */
-#keyboardPanel{position:sticky;bottom:env(safe-area-inset-bottom);z-index:5;box-shadow:0 -6px 20px rgba(0,0,0,.25);border-top:1px solid #2c3742}
+/* Keyboard not sticky on phones (default) */
+#keyboardPanel{position:static;bottom:auto;z-index:auto;box-shadow:none;border-top:1px solid var(--border)}
 
 /* Phrase grid denser on phones */
 .grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
