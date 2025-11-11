@@ -1,5 +1,16 @@
 /* extra styles (unchanged basics) */
-:root{--bg:#0f141a;--panel:#111821;--key:#22303c;--key-b:#2e3b48;--text:#e6eef2}
+:root{
+  /* Blue + white theme */
+  --bg:#ffffff;
+  --panel:#ffffff;
+  --text:#0b1220;
+  --border:#cfe0ff;
+  --accent:#1e40af; /* toolbar/buttons */
+  --accent-muted:#e7efff;
+  --key:#ffffff;
+  --key-b:#cfe0ff;
+  --kbd-cols:4;
+}
 *{box-sizing:border-box}
 button,input,textarea{font:inherit}
 .btn[disabled]{opacity:.6}
@@ -8,3 +19,64 @@ button,input,textarea{font:inherit}
 .right-dock{order:2}
 body.righty #keyboardPanel{order:2}
 body.righty #sharePanel{order:1}
+
+/* Mobile-first tweaks */
+body{padding-bottom:env(safe-area-inset-bottom);background:var(--bg);color:var(--text)}
+.appbar{padding-top:calc(12px + env(safe-area-inset-top));padding-left:calc(16px + env(safe-area-inset-left));padding-right:calc(16px + env(safe-area-inset-right));background:var(--accent);color:#fff}
+
+/* Scale key size responsively and make grid columns adaptive */
+.keys{grid-template-columns:repeat(var(--kbd-cols),minmax(72px,1fr))}
+.key{font-size:clamp(20px,5vw,28px);min-height:56px;background:var(--key);border:1px solid var(--key-b);color:var(--text)}
+.key:active{background:var(--accent-muted);filter:none}
+
+/* Buttons a bit larger on phones */
+@media (max-width: 480px){
+  .btn{padding:12px 14px;font-size:18px}
+  textarea{font-size:clamp(18px,4.5vw,24px)}
+  :root{--kbd-cols:3}
+}
+
+/* Use more columns when there is horizontal room (e.g., landscape phones) */
+@media (orientation: landscape) and (max-height: 420px){
+  :root{--kbd-cols:6}
+}
+
+/* Tablets can afford an extra column */
+@media (min-width: 768px){
+  :root{--kbd-cols:5}
+}
+
+/* True mobile-first layout: column flow by default */
+.container{display:flex;flex-direction:column;gap:12px;padding:12px;min-height:100svh}
+#composePanel{order:1}
+#keyboardPanel{order:2}
+#phrasesPanel{order:3}
+#sharePanel{order:4}
+
+/* Keep the keyboard accessible on phones */
+#keyboardPanel{position:sticky;bottom:env(safe-area-inset-bottom);z-index:5;box-shadow:0 -6px 20px rgba(0,0,0,.25);border-top:1px solid #2c3742}
+
+/* Phrase grid denser on phones */
+.grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+.phrase{font-size:clamp(16px,3.5vw,18px);padding:14px 16px}
+.tabbar{padding-bottom:6px;-webkit-overflow-scrolling:touch}
+
+/* Desktop/tablet layout: switch to grid columns */
+@media (min-width: 1100px){
+  .container{display:grid;grid-template-columns:1fr 420px}
+  /* restore natural ordering when in grid */
+  #composePanel,#keyboardPanel,#phrasesPanel,#sharePanel{order:initial}
+}
+
+/* Blue + white theme components */
+.panel{background:var(--panel);border:1px solid var(--border)}
+textarea{background:var(--panel);color:var(--text);border:1px solid var(--border)}
+.btn{background:var(--accent);color:#fff;border:none}
+.btn:active{transform:scale(0.98);filter:brightness(1.05)}
+.appbar .btn{background:#fff;color:var(--accent)}
+.pill{background:#eef3ff;border:1px solid var(--border);color:var(--text)}
+.tab{background:#eef3ff;border:1px solid var(--border);color:var(--text)}
+.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.phrase{background:#f8fbff;border:1px solid var(--border);color:var(--text)}
+.phrase:active{background:var(--accent-muted)}
+.footer{color:var(--text)}
